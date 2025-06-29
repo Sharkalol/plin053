@@ -1,37 +1,41 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from './pages/Home/Home';
+import NewCharacter from './pages/NewCharacter/NewCharacter';
+import NoPage from './pages/NoPage/NoPage';
+import ChooseStats from './pages/ChooseStats/ChooseStats';
+import ChooseSkills from './pages/ChooseSkills/ChooseSkills';
+import Character from './pages/Character/Character';
+import Characters from './pages/Characters/Characters';
+import ChoosePersonality from './pages/ChoosePersonality/ChoosePersonality';
 
-function App() {
+const App = () => {
   const [count, setCount] = useState(0)
 
   const onPress = () =>{
     setCount((count) => count + 1)
   }
 
+  const onPress2 = () =>{
+    setCount((count) => count + 1)
+  }
+
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={onPress}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BrowserRouter>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/new_character" element={<NewCharacter />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/choose_stats/:id" element={<ChooseStats />} />
+        <Route path="/choose_skills/:id" element={<ChooseSkills />} />
+        <Route path="/character/:id" element={<Character />} />
+        <Route path="/choose_personality/:id" element={<ChoosePersonality />} />
+        <Route path="/characters" element={<Characters />} />
+        <Route path="*" element={<NoPage />} />
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
